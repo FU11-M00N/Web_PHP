@@ -1,0 +1,413 @@
+<!Doctype html>
+<html>
+ <head>
+ <meta charset="utf-8">
+  <style>
+   
+   body{
+      color:white;
+   }
+   h3
+   {
+      margin-left:0px;
+   }
+   #di /* 중앙 정렬을 하기위해 text-align은 default값인 left로 두면서 왼쪽엔 margin값을 크게 주었다. */
+   {
+      font-family:'카카오 Regular';
+      text-align:left-side;
+      margin:10px 10px 10px 200px;
+      width:850px;
+      height:800px;
+      float:left; /* div안에 있는 요소들 중 블록의 특성을 가지고 있는 것들이 있어서 float를 left로 주었다. */
+      padding:30px;
+   
+      
+      
+         
+   }
+   input[type]:focus /* input type 안에 있는 모든 하위 요소들이 focus되면 생성되는 보더 값. */
+   {
+      border:1px solid grey;   
+   }
+   
+   input[type] /* 요소들과 테두리 사이가 너무 가까운 것 같아 패딩값을 주고 둥글게 깎았다. */
+   {
+      padding: 10px;
+      height:20px;
+      border-radius:10px;   
+   }
+   span
+   {
+      margin: 15px 0px 15px 15px;
+      
+      width:20px;
+      text-align:center;
+   }
+   .detail
+   {
+      font-family:'카카오 Regular';
+      font-size:14px;
+      color:#BDBDBD;
+      margin-left:214px;
+   }
+   
+   #nic /* 닉네임 마진값. */
+   {
+      margin:10px 10px 10px 133px;
+   }
+   #kmail /* 메일 마진값. */
+   {
+      margin:10px 10px 10px 58px;
+   }
+   #pw /* 비밀번호 마진값. */
+   {
+      margin:10px 10px 10px 32px;
+   }
+   #rpw /* 비밀번호 재입력 마진값. */
+   {
+      margin:10px 10px 10px 70px;
+   }
+   #date /* 날짜의 마진값. */
+   { 
+      margin: 10px 0px 10px 117px;
+   }
+   .check
+   {
+      font-size:16px;
+   }
+   
+   #mail /* 메일 옵션의 크기와 모양 조정 */
+   {
+      border-radius:10px;
+      height:43px;
+      width:200px;
+   }
+   .date /* 날짜 옵션의 크기와 모양 조정 */
+   {
+      border-radius:10px;
+      height:40px;
+      width:80px;
+   }
+   #male
+   {
+      margin:10px 10px 10px 163px;
+   }
+   .gender /* 라디오 버튼 옆의 폰트 크기 조정 */
+   {
+      font-size:16px;
+   }
+   #sub
+   {
+      height:40px;
+      width:75px;
+      font-family:'카카오 Regular';
+   }
+   input [type="button"] /* 제출 버튼의 크기 조정 */
+   {
+      width:200px;
+      height:100px;
+   }
+   #date
+   {
+      margin-left:136px;
+      
+   }
+   /* 메뉴바 */
+   .navbar {
+      overflow: hidden;
+      background-color: black;
+      position: fixed; /* 맨 위에 고정시키기 위해 fixed 로 설정했다. */
+      top: 0; /* 이 설정을 해주어야 빈 공간 없이 top에 위치한다. */
+      width: 100%; /* 가로 페이지를 다 채운다. */
+   }
+
+   /* Links inside the navbar */
+   .navbar a {
+      float: left;   /* 리스트 옆으로 세우기 */
+      display: block;      /* hover했을때 블록형으로 색을 채우기 위한 block */
+      color: #f2f2f2;      /* 바탕 색 설정. */
+      text-align: center;   /* 텍스트는 센터로 정렬. */
+      padding:20px 85px;   /* 패딩 값을 주어 적절하게 공간을 남긴다.*/
+      text-decoration: none;   /* 밑줄이 원래 생기는데, 없애버린다! */
+  
+   }
+   /* hover했을때 색 바꾸기! */
+   .navbar a:hover {
+      background: #ddd;   /*hover했을때 바뀌는 바탕색을 적절하게 설정한다.*/
+      color: black;      /*home 에만 해당하는 사항이다.*/
+   }
+
+   /* 중앙 text! */
+   .main {
+      margin-top: 30px; /*위에 마진 주기( 메뉴 바 공간 두기)*/
+   } 
+   #text{
+      padding-top: 50px;
+   }
+
+   
+   
+  </style>
+  <script>
+   function fun(p,msg){  
+      
+      m(p,msg);
+   
+      function m(p,msg) // 첫번째 비밀번호 입력창 조건 검사. 숫자 제외 다른 문자가 들어갔을 때 포커스가 되며 재입력해야한다.
+      {
+         var pnum=/^[0-9]+$/; 
+       
+         if (!(p.value.match(pnum))) // p값과 pnum을 매치하여 조건에 맞다면
+         {
+            
+         alert(msg); // msg의 내용으로 알림을 띄우고 
+            p.focus(); // p값에 포커스를 주며
+            p.value=""; //재입력하게 한다.
+         return false; //조건에 맞지 않으므로 return 값으로 false.
+         
+         }
+       
+         else // p값과 pnum값을 매치하여 조건에 맞지 않는다면
+         {
+            leng(); //비밀번호의 입력값이 8~32자인지 검사하러 간다!
+           
+         }
+      }  
+     function leng() // 비밀번호의 입력값이 8~32자 사이인지 조건 검사.
+     {
+      var pleng=document.getElementById("pw").value;
+      
+      if (!(pleng.length>=8 && pleng.length<=32)) //만약 비밀번호 값이 8자에서 32자 사이라면
+      {
+         alert("비밀번호를 8자~32자 사이로 입력해주십시오.");
+         p.focus(); // p값에 포커스를 주며
+            p.value=""; //재입력하게 한다.
+         return false;
+         
+         
+      }
+      else // 비밀번호의 값이 8자에서 32자 사이가 아니라면
+      {
+         same(); // same 함수 호출.
+      }
+     }
+     
+      
+   function same() // 비밀번호의 입력값과 비밀번호 확인의 입력값이 같은지 조건검사.
+   {
+      
+      if(document.getElementById("pw").value!=document.getElementById("rpw").value) // 비밀번호값과 비밀번호 확인 값이 같다면
+      {
+         
+         alert("비밀번호와 비밀번호 재확인 번호가 같지않습니다.");// 비밀번호값과 비밀번호 확인 값이 같지 않다면
+         p.focus(); // p값에 포커스를 주며
+            p.value=""; //재입력하게 한다.
+         return false;// 서버에 false값을 넘긴다.
+         
+      }
+      else
+      {
+         nickname(); 
+      }
+   }
+   function nickname()
+   {
+      var nick2=/^[a-z]+$/; 
+      var nikk=document.getElementById('nic')
+       
+         if (!(nikk.value.match(nick2))) // nik값과 nick2을 매치하여 조건에 맞다면
+         {
+            
+         alert("닉네임은 영문자로 써주십시오. ");
+         
+         nikk.focus(); // p값에 포커스를 주며
+            nikk.value=""; //재입력하게 한다.
+            return false; //조건에 맞지 않으므로 return 값으로 false.
+         
+         
+         }
+       
+         else // nik값과 nick2값을 매치하여 조건에 맞지 않는다면
+         {
+           nick1(); //nick1함수를 호출.
+         }
+   }
+   
+   function nick1() // 닉네임의 입력값이 4~32자 사이인지 조건 검사.
+     {
+      var nick1=document.getElementById("nic");
+      
+      if (!(nick1.value.length>=4 && nick1.value.length<=32)) //만약 닉네임 값이 4자에서 32자 사이라면
+      {
+         alert("닉네임이 4~32자 사이가 아닙니다. 다시 입력해주십시오.");
+         nick1.focus(); // p값에 포커스를 주며
+            nick1.value=""; //재입력하게 한다.
+         return false;
+         
+         
+         
+      }
+      else // 닉네임의 값이 4자에서 32자 사이가 아니라면
+      {
+         alert("가입이 완료되었습니다.") ; // 모든 관문을 통과하였다!
+         
+      }
+      
+      return submit();
+     }
+     
+     }
+  </script>
+  
+  <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.0.min.js" ></script>
+   <script type="text/javascript">
+      $(function(){
+       $('#bg-text').mouseenter(function(){
+         $('#bg-text').text('Sensibility');
+       });
+      $('#bg-text').mouseleave(function(){
+         $('#bg-text').text('Security');
+       });
+      });
+      $(function(){
+       $('#change1').mouseenter(function(){
+         $('#change1').text('lo#in');
+         $('#change1').css('color','red');
+         $('#change1').css('list-style','none');
+       });
+       $('#change1').mouseleave(function(){
+         $('#change1').text('login');
+         $('#change1').css('color','white');
+       });
+      });
+      $(function(){
+       $('#change2').mouseenter(function(){
+         $('#change2').text('J#i% $s ');
+         $('#change2').css('color','red');
+         $('#change2').css('list-style','none');
+       });
+       $('#change2').mouseleave(function(){
+         $('#change2').text('Join Us ');
+         $('#change2').css('color','white');
+       });
+      });
+      $(function(){
+       $('#change3').mouseenter(function(){
+         $('#change3').text('&art ');
+         $('#change3').css('color','red');
+         $('#change3').css('list-style','none');
+       });
+       $('#change3').mouseleave(function(){
+         $('#change3').text('Cart ');
+         $('#change3').css('color','white');
+       });
+      });
+      $(function(){
+       $('#change4').mouseenter(function(){
+         $('#change4').text('Q%A ');
+         $('#change4').css('color','red');
+         $('#change4').css('list-style','none');
+       });
+       $('#change4').mouseleave(function(){
+         $('#change4').text('Q&A');
+         $('#change4').css('color','white');
+       });
+      });
+      $(function(){
+       $('#change5').mouseenter(function(){
+         $('#change5').text('M#');
+         $('#change5').css('color','red');
+         $('#change5').css('list-style','none');
+       });
+       $('#change5').mouseleave(function(){
+         $('#change5').text('My');
+         $('#change5').css('color','white');
+       });
+      });
+
+   </script>
+ </head>
+ <body bgcolor="black">
+
+   
+
+  <form name="myform" method="post" action="은비php.php">
+   
+      <span class="navbar">
+   <font face="카카오 Bold" size="5">
+  <a href="홈페이지설계.html" >Home</a>
+  <a href="#login" id="change1">Login</a>
+  <a href="은비.php" id='change2'>Join</a>
+  <a href="#news" id='change3'>Cart</a>
+  <a href="#contact" id='change4'>Q&A</a>
+  <a href="#news" id='change5'>My</a>
+  
+</span>
+   
+   <br><br><br>
+   
+   <div id="di" style="border: 4px dashed #bcbcbc;">
+   <font face ="카카오 Regular" size="5px" color="#cbe86b"></font>
+   
+   
+   
+   
+   <h3  style="color:white;">보안을 감성하다 : 가만</h3>
+   <font face ="카카오 Regular" size="1px" color="gray">해커는 사람을 더욱더 쉽게 속이기 위해  끊임없이 사람의 취약점을 연구하고 있습니다. 
+   그런데 우리 기업 보안 전문가들은 해커만큼 우리 직원들에 대해 알고 있나요? <br>
+   그리고 우리의 보안 가이드는 그들보다 매번 한발 늦습니다. 다양한 보안 위협 속에  임직원들을 어디까지 통제할 수 있을까요? 통제보다 임직원 스스로가 성장하게 하는 보안이 이제는 필요한 시점입니다.<br><font>
+   <font face ="카카오 Regular" size="2px" color="orange">
+   환영합니다. 보다 감성적이고 친숙한 보안을 위해 힘쓰는 가만입니다.
+   
+   </font>
+   <br><br>
+   <hr color="white" size="0" width="99%">
+   <br>
+   
+   <font face ="카카오 Regular" size="4px">
+     
+     <span>닉네임</span>
+     <span><input type="text" placeholder="닉네임을 입력해주세요." id="nic" required name='nic'></span>
+     <br>
+     <span class="detail">·닉네임은 4~32자 사이의 영문자로 입력해주십시오. </span>
+     <br><br>
+     <span class="main" required>비밀번호 (8~32자리) </span>
+    
+    <span><input type="password" placeholder="비밀번호(8~32자리)" size="60" id="pw" maxlength="32" required name='pw'></span>
+     <br>
+     <br>
+     <span class="main" required>비밀번호 재입력</span>
+     <span><input type="password" placeholder="비밀번호 재입력" id="rpw" size="60" maxlength="32" required></span>
+     <br>
+     <span class="detail">·비밀번호는 8~32자의 숫자만을 조합하여 비밀번호를 설정해주세요.</span>
+     <br>
+     <span class="detail">·다른 사이트에서 사용하는 것과 동일하거나 쉬운 비밀번호는 사용하지 마세요.</span>
+     <br>
+     <span class="detail">·안전한 계정 사용을 위해 비밀번호는 주기적으로 변경해주세요. </span>
+     <br>
+     <br>
+     
+     <br>
+     <span>생년월일</span>
+     
+      <input type="date" id="date" name='date'>
+
+      <br>
+      <br>
+      <span>성별</span>
+      <span id="male" class="gender"><input type="radio" value="m" name="gender">남성</span>
+       <span class="gender"><input type="radio" value="f" name="gender">여성</span>
+      <span class="gender"><input type="radio" value="n" name="gender">선택안함</span>
+      <br>
+      <br>
+      <center>
+      <span>
+      <input type="submit" value="제출" id="sub" onclick="fun(document.getElementById('pw'), '아무것도 입력하지 않았거나, 숫자가 아닙니다.')">
+      </span>
+      </center>
+    </div>
+   
+  </form>
+  
+ </body>
+</html>
